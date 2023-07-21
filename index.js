@@ -32,7 +32,7 @@ app.get('/', (req,res)=>{
 
 app.use('/api/users', userRoute)
 app.use('/api/products', productRoute)
-app.use('/api/ecommerce/admin', adminRoute)
+app.use('/api/steven/admin', adminRoute)
 app.use('/api/orders', orderRoute)
 app.use('/api/issues', issueRoute)
 
