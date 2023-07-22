@@ -51,23 +51,20 @@ const bestSellerProduct = async(req, res) => {
         throw new Error(err)
     }
 }
-const getTopSixNewProducts = async(req, res) => {
+const getTopSixNewProducts = async (req, res) => {
     try {
-        const product = await Product.find({})
-        if(product){
-        const sortedProducts = await Product.sort((a, b) => b.createdAt - a.createdAt);
-        if(sortedProducts){
-            res.json({message: 'product retrieved', sortedProducts})
-        }else{
-            res.status(400).json({message: 'no product found'})
+        const products = await Product.find({}).sort({ createdAt: -1 }).limit(6);
+
+        if (products.length > 0) {
+            res.json({ message: 'Products retrieved', products });
+        } else {
+            res.status(404).json({ message: 'No products found' });
         }
-    }else{
-        res.status(400).json({messsage: 'product not found'})
-    }
     } catch (error) {
-        
+        res.status(500).json({ message: 'Internal Server Error' });
     }
 };
+
 
 const getFeaturedProducts = async (req, res) => {
 	try {
